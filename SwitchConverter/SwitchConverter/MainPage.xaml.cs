@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace SwitchConverter
+{
+    public partial class MainPage : ContentPage
+    {
+        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        bool isToggeled = true;
+        public bool IsToggeled
+        {
+            get { return isToggeled; }
+            set { SetProperty(ref isToggeled, value); }
+        }
+
+        public MainPage()
+        {
+            BindingContext = this;
+            InitializeComponent();
+        }
+
+        private void OnClickToggled(object sender, ToggledEventArgs e)
+        {
+
+            IsToggeled = e.Value;
+
+        }
+    }
+}

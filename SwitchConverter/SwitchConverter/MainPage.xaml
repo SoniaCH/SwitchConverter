@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SwitchConverter"
+             xmlns:converters="clr-namespace:SwitchConverter;assembly:SwitchConverter"
+             x:Class="SwitchConverter.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SwitchToIntConverter x:Key="SwitchToIntConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="Center" Padding="10">
+
+        <Slider  x:Name="slider"  Maximum="100" VerticalOptions="CenterAndExpand" Value="{Binding IsToggeled, Converter={StaticResource SwitchToIntConverter}"/>
+        <Switch  HorizontalOptions="Center" Toggled="OnClickToggled"/>
+
+    </StackLayout>
+
+</ContentPage>
